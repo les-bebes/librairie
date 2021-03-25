@@ -4,6 +4,8 @@ from urllib.request import urlopen
 base_url_search = "https://fr.openfoodfacts.org/cgi/"
 base_url_infos = "https://world.openfoodfacts.org/api/v0/"
 
+favorties = list()
+
 
 def search(label):
     url = f"{base_url_search}search.pl?action=process&search_terms={label}&page_size=20&json=1"
@@ -26,16 +28,18 @@ def top(categorie_id, classement):
 
 
 # Favoris volatiles
-def add_favorite(id):
-    pass
+def add_favorite(product_id):
+    if product_id not in favorties:
+        favorties.append(product_id)
 
 
-def remove_favorite(id):
-    pass
+def remove_favorite(product_id):
+    if product_id in favorties:
+        favorties.remove(product_id)
 
 
 def get_favorites():
-    pass
+    return favorties
 
 
 # BONUS: alternatives aux aliments (même catégorie)
